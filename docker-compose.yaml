@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    mysql:
+        image: mysql:8
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: test123*
+            MYSQL_DATABASE: economix-app
+            MYSQL_USER: economix-app
+            MYSQL_PASSWORD: economix-app
