@@ -3,6 +3,8 @@ import { NotFoundError } from "./error/types.error";
 import { errorHandler } from "./error/handler.error";
 import { userRouter } from "./routes/user.routes";
 import { groupRouter } from "./routes/group.routes";
+import { budgetRouter } from "./routes/budget.routes";
+import { transactionRouter } from "./routes/transaction.routes";
 
 const PORT = 8081;
 
@@ -11,6 +13,8 @@ export function initApi() {
     application.use(json());
     application.use("/user", userRouter);
     application.use("/group", groupRouter);
+    application.use("/budget", budgetRouter);
+    application.use("/transaction", transactionRouter);
     application.use((request, response, next) => {
         throw new NotFoundError();
     });
