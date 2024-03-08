@@ -132,4 +132,44 @@ export async function seeder() {
     ]);
 
     await manager.save(transaction);
+
+    const budgets = manager.create(Budget, [
+        {
+            title: "Moe's Tavern",
+            description: "Bar de Moe",
+            amount: 1000,
+            user: homer,
+        },
+        {
+            title: "Courses",
+            description: "Courses de Marge",
+            amount: 2500,
+            user: marge,
+        },
+    ]);
+
+    await manager.save(budgets);
+
+    const transactions = manager.create(Transaction, [
+        {
+            title: "Moe",
+            amount: 1000,
+            date: new Date("2024-03-08"),
+            budget: budgets[0],
+        },
+        {
+            title: "Courses",
+            amount: 2500,
+            date: new Date("2024-03-08"),
+            budget: budgets[1],
+        },
+        {
+            title: "ardoise Moe",
+            amount: -300,
+            date: new Date("2024-03-08"),
+            budget: budgets[0],
+        },
+    ]);
+
+    await manager.save(transactions);
 }
