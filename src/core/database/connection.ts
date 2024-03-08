@@ -41,7 +41,7 @@ export class DatabaseConnection {
             username: process.env.DB_USERNAME,
             password: process.env.DB_PASSWORD,
             type: "mysql",
-            entities: ["src/core/models/*.ts"],
+            entities: ["src/core/models/*.class.ts"],
         });
 
         await connection.initialize();

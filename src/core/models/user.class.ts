@@ -34,8 +34,10 @@ export class User {
     @Column({
         type: "enum",
         enum: Object.values(Role),
+        nullable: true,
+        default: null,
     })
-    public declare role: Role;
+    public declare role: Role | null;
 
     //? User has nullable because of zero to one relationship that doesn't exist in typeorm
     @OneToOne(() => Group, (group) => group.users)
