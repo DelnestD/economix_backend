@@ -7,7 +7,7 @@ export class Transaction {
     public declare id: string;
 
     @Column({
-        type: "datetime",
+        type: "date",
     })
     public declare date: Date;
 
