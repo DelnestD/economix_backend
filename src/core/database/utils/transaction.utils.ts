@@ -1,7 +1,7 @@
 import { EntityNotFoundError } from "../../../api/error/types.error";
 import { Transaction } from "../../models/transaction.class";
 import { DatabaseConnection } from "../connection";
-import { getBudgetById } from "./budget.utils";
+import { getBudgetById, getBudgetByUserId } from "./budget.utils";
 
 export async function getTransactionById(id: string) {
     const foundEntity = await DatabaseConnection.manager.findOne(Transaction, {
@@ -31,6 +31,30 @@ export async function getTransactionsByBudgetId(budgetId: string) {
     });
 
     if (!foundEntities || foundEntities.length === 0) {
+        throw new EntityNotFoundError();
+    }
+
+    return foundEntities;
+}
+
+export async function getTransactionsByUserId(userId: string) {
+    const foundBudgets = await getBudgetByUserId(userId);
+    console.log(foundBudgets);
+    const foundEntities = [];
+    for (const budget of foundBudgets) {
+        const transactions = await DatabaseConnection.manager.find(Transaction, {
+            where: {
+                budget,
+            },
+            order: {
+                date: "DESC",
+                createdAt: "DESC",
+            },
+        });
+        foundEntities.push(...transactions);
+    }
+    console.log(foundEntities);
+    if (foundEntities.length === 0) {
         throw new EntityNotFoundError();
     }
 
