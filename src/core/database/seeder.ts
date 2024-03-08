@@ -7,85 +7,14 @@ import { Transaction } from "../models/transaction.class";
 export async function seeder() {
     const manager = DatabaseConnection.manager;
 
-    const simpson = manager.create(Group, {
-        name: "Famille Simpson",
-    });
-    await manager.save(simpson);
-
-    const [homerAddTransaction, margeAddTransaction, bartAddTransaction, lisaAddTransaction, maggieAddTransaction] = manager.create(Transaction, [
-        {
-            title: "Salaire",
-            amount: 1000,
-            date: new Date("2024-03-08"),
-        },
-        {
-            title: "Argent de Poche",
-            amount: 1000,
-            date: new Date("2024-03-08"),
-        },
-        {
-            title: "Argent de Poche",
-            amount: 100,
-            date: new Date("2024-03-08"),
-        },
-        {
-            title: "Argent de Poche",
-            amount: 100,
-            date: new Date("2024-03-08"),
-        },
-        {
-            title: "Argent de Poche",
-            amount: 300,
-            date: new Date("2024-03-08"),
-        },
-    ]);
-
-    await manager.save([homerAddTransaction, margeAddTransaction, bartAddTransaction, lisaAddTransaction, maggieAddTransaction]);
-
-    const [homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Budget, [
-        {
-            title: "Compte courant",
-            description: "compte courant d'homer",
-            amount: 1000,
-            transactions: [homerAddTransaction],
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de marge",
-            amount: 1000,
-            transactions: [margeAddTransaction],
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de bart",
-            amount: 100,
-            transactions: [bartAddTransaction],
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de lisa",
-            amount: 100,
-            transactions: [lisaAddTransaction],
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de maggie",
-            amount: 300,
-            transactions: [maggieAddTransaction],
-        },
-    ]);
-
-    await manager.save([homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount]);
-
-    const users = manager.create(User, [
+    const [homer, marge, bart, lisa, maggie] = manager.create(User, [
         {
             email: "homer@simpsons.com",
             firstName: "Homer",
             lastName: "Simpson",
             password: "simpson",
             role: Role.LEADER,
-            group: simpson,
-            budgets: [homerAccount],
+            group: null,
         },
         {
             email: "marge@simpsons.com",
@@ -93,8 +22,7 @@ export async function seeder() {
             lastName: "Bouvier",
             password: "simpson",
             role: Role.LEADER,
-            group: simpson,
-            budgets: [margeAccount],
+            group: null,
         },
         {
             email: "bart@simpsons.com",
@@ -102,8 +30,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            group: simpson,
-            budgets: [bartAccount],
+            group: null,
         },
         {
             email: "lisa@simpsons.com",
@@ -111,8 +38,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            group: simpson,
-            budgets: [lisaAccount],
+            group: null,
         },
         {
             email: "maggie@simpsons.com",
@@ -120,9 +46,90 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            group: simpson,
-            budgets: [maggieAccount],
+            group: null,
         },
     ]);
-    await manager.save(users);
+    await manager.save([homer, marge, bart, lisa, maggie]);
+
+    const [homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Budget, [
+        {
+            title: "Compte courant",
+            description: "compte courant d'homer",
+            amount: 1000,
+            user: homer,
+        },
+        {
+            title: "Compte courant",
+            description: "compte courant de marge",
+            amount: 1000,
+            user: marge,
+        },
+        {
+            title: "Compte courant",
+            description: "compte courant de bart",
+            amount: 100,
+            user: bart,
+        },
+        {
+            title: "Compte courant",
+            description: "compte courant de lisa",
+            amount: 100,
+            user: lisa,
+        },
+        {
+            title: "Compte courant",
+            description: "compte courant de maggie",
+            amount: 300,
+            user: maggie,
+        },
+    ]);
+
+    await manager.save([homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount]);
+
+    const simpson = manager.create(Group, {
+        name: "Famille Simpson",
+    });
+    await manager.save(simpson);
+
+    homer.group = simpson;
+    marge.group = simpson;
+    bart.group = simpson;
+    lisa.group = simpson;
+    maggie.group = simpson;
+    await manager.save([homer, marge, bart, lisa, maggie]);
+
+    const transaction = manager.create(Transaction, [
+        {
+            title: "Salaire",
+            amount: 1000,
+            date: new Date("2024-03-08"),
+            budget: homerAccount,
+        },
+        {
+            title: "Argent de Poche",
+            amount: 1000,
+            date: new Date("2024-03-08"),
+            budget: margeAccount,
+        },
+        {
+            title: "Argent de Poche",
+            amount: 100,
+            date: new Date("2024-03-08"),
+            budget: bartAccount,
+        },
+        {
+            title: "Argent de Poche",
+            amount: 100,
+            date: new Date("2024-03-08"),
+            budget: lisaAccount,
+        },
+        {
+            title: "Argent de Poche",
+            amount: 300,
+            date: new Date("2024-03-08"),
+            budget: maggieAccount,
+        },
+    ]);
+
+    await manager.save(transaction);
 }

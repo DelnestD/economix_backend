@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Transaction } from "./transaction.class";
 import { User } from "./user.class";
 
@@ -26,7 +26,7 @@ export class Budget {
     @OneToOne(() => User, (user) => user.budgets)
     public declare user: User;
 
-    @OneToMany(() => Transaction, (transaction) => transaction.budget)
+    @ManyToOne(() => Transaction, (transaction) => transaction.budget)
     public declare transactions: Transaction[] | null;
 
     @Column({

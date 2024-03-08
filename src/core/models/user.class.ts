@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Group } from "./group.class";
 import { Budget } from "./budget.class";
 
@@ -41,10 +41,10 @@ export class User {
     public declare role: Role | null;
 
     //? User has nullable because of zero to one relationship that doesn't exist in typeorm
-    @OneToOne(() => Group, (group) => group.users)
+    @OneToOne(() => Group, (group) => group.users, { nullable: true })
     public declare group: Group | null;
 
-    @OneToMany(() => Budget, (budget) => budget.user)
+    @ManyToOne(() => Budget, (budget) => budget.user)
     public declare budgets: Budget[];
 
     @Column({
