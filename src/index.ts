@@ -4,7 +4,7 @@ import { initApi } from "./api";
 
 async function initApplication() {
     config({
-        path: "development.env",
+        path: "dev.env",
     });
 
     await DatabaseConnection.init();
