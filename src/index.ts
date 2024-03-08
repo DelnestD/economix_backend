@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { DatabaseConnection } from "./core";
+import { DatabaseConnection } from "./core/database/connection";
 import { initApi } from "./api";
 
 async function initApplication() {
