@@ -5,11 +5,9 @@ import { DatabaseConnection } from "./connection";
 export async function seeder() {
     const manager = DatabaseConnection.manager;
 
-    const simpson = manager.create(Group, [
-        {
-            name: "Famille Simpson",
-        },
-    ]);
+    const simpson = manager.create(Group, {
+        name: "Famille Simpson",
+    });
     await manager.save(simpson);
 
     const users = manager.create(User, [
@@ -19,7 +17,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.LEADER,
-            groupe: simpson,
+            group: simpson,
         },
         {
             email: "marge@simpsons.com",
@@ -27,7 +25,7 @@ export async function seeder() {
             lastName: "Bouvier",
             password: "simpson",
             role: Role.LEADER,
-            groupe: simpson,
+            group: simpson,
         },
         {
             email: "bart@simpsons.com",
@@ -35,7 +33,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            groupe: simpson,
+            group: simpson,
         },
         {
             email: "lisa@simpsons.com",
@@ -43,7 +41,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            groupe: simpson,
+            group: simpson,
         },
         {
             email: "maggie@simpsons.com",
@@ -51,7 +49,7 @@ export async function seeder() {
             lastName: "Simpson",
             password: "simpson",
             role: Role.MEMBER,
-            groupe: simpson,
+            group: simpson,
         },
     ]);
     await manager.save(users);
