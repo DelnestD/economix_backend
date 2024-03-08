@@ -20,17 +20,21 @@ export async function getTransactionById(id: string) {
 export async function getTransactionsByBudgetId(budgetId: string) {
     const foundBudget = await getBudgetById(budgetId);
 
-    const foundEntity = await DatabaseConnection.manager.find(Transaction, {
+    const foundEntities = await DatabaseConnection.manager.find(Transaction, {
         where: {
             budget: foundBudget,
         },
+        order: {
+            date: "DESC",
+            createdAt: "DESC",
+        },
     });
 
-    if (!foundEntity) {
+    if (!foundEntities || foundEntities.length === 0) {
         throw new EntityNotFoundError();
     }
 
-    return foundEntity;
+    return foundEntities;
 }
 
 export async function insertTransaction(body: Object) {
