@@ -23,10 +23,10 @@ export class Budget {
     })
     public declare amount: number;
 
-    @OneToOne(() => User, (user) => user.budgets)
+    @ManyToOne(() => User, (user) => user.budgets)
     public declare user: User;
 
-    @ManyToOne(() => Transaction, (transaction) => transaction.budget)
+    @OneToOne(() => Transaction, (transaction) => transaction.budget)
     public declare transactions: Transaction[] | null;
 
     @Column({

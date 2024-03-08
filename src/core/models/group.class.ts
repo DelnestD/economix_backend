@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.class";
 
 @Entity()
@@ -9,7 +9,7 @@ export class Group {
     @Column()
     public declare name: string;
 
-    @ManyToOne(() => User, (user) => user.group)
+    @OneToOne(() => User, (user) => user.group)
     public declare users: User[];
 
     @Column({
