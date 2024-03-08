@@ -14,6 +14,7 @@ export class Budget {
 
     @Column({
         type: "text",
+        nullable: true,
     })
     public declare description: string;
 
