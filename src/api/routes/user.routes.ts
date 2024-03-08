@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUser, getUserById, getUserByEmail, insertUser, updateUser } from "../../core/database/utils/user.utils";
+import { deleteUser, getUserById, getUserByEmail, insertUser, updateUser, getUsersByGroupId } from "../../core/database/utils/user.utils";
 
 export const userRouter = Router();
 
@@ -16,6 +16,15 @@ userRouter.get("/email/:email", async (request, response, next) => {
     try {
         const user = await getUserByEmail(request.params.email);
         response.send(user);
+    } catch (err) {
+        next(err);
+    }
+});
+
+userRouter.get("/group/:groupId", async (request, response, next) => {
+    try {
+        const users = await getUsersByGroupId(request.params.groupId);
+        response.send(users);
     } catch (err) {
         next(err);
     }

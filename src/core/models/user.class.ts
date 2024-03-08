@@ -1,5 +1,6 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Group } from "./group.class";
+import { Budget } from "./budget.class";
 
 export enum Role {
     LEADER = "leader",
@@ -42,6 +43,9 @@ export class User {
     //? User has nullable because of zero to one relationship that doesn't exist in typeorm
     @OneToOne(() => Group, (group) => group.users)
     public declare group: Group | null;
+
+    @OneToMany(() => Budget, (budget) => budget.user)
+    public declare budgets: Budget[];
 
     @Column({
         type: "timestamp",
