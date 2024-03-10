@@ -3,6 +3,7 @@ import { Group } from "../models/group.class";
 import { DatabaseConnection } from "./connection";
 import { Budget } from "../models/budget.class";
 import { Transaction } from "../models/transaction.class";
+import { Account } from "../models/account.class";
 
 export async function seeder() {
     const manager = DatabaseConnection.manager;
@@ -51,40 +52,42 @@ export async function seeder() {
     ]);
     await manager.save([homer, marge, bart, lisa, maggie]);
 
-    const [homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Budget, [
+    const [homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Account, [
         {
             title: "Compte courant",
             description: "compte courant d'homer",
-            amount: 1000,
-            user: homer,
         },
         {
             title: "Compte courant",
             description: "compte courant de marge",
-            amount: 1000,
-            user: marge,
+        },
+        {
+            title: "Compte Commun",
+            description: "Compte commun de la famille Simpson",
         },
         {
             title: "Compte courant",
             description: "compte courant de bart",
-            amount: 100,
-            user: bart,
         },
         {
             title: "Compte courant",
             description: "compte courant de lisa",
-            amount: 100,
-            user: lisa,
         },
         {
             title: "Compte courant",
             description: "compte courant de maggie",
-            amount: 300,
-            user: maggie,
         },
     ]);
 
-    await manager.save([homerAccount, margeAccount, bartAccount, lisaAccount, maggieAccount]);
+    await manager.save([homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount]);
+
+    homer.account = [homerAccount, communAccount];
+    marge.account = [margeAccount, communAccount];
+    bart.account = [bartAccount];
+    lisa.account = [lisaAccount];
+    maggie.account = [maggieAccount];
+
+    await manager.save([homer, marge, bart, lisa, maggie]);
 
     const simpson = manager.create(Group, {
         name: "Famille Simpson",
@@ -103,31 +106,43 @@ export async function seeder() {
             title: "Salaire",
             amount: 1000,
             date: new Date("2024-03-08"),
-            budget: homerAccount,
+            account: homerAccount,
+            budget: null,
         },
         {
             title: "Argent de Poche",
             amount: 1000,
             date: new Date("2024-03-08"),
-            budget: margeAccount,
+            account: margeAccount,
+            budget: null,
+        },
+        {
+            title: "Argent Courses + Factures",
+            amount: 4000,
+            date: new Date("2024-03-08"),
+            account: communAccount,
+            budget: null,
         },
         {
             title: "Argent de Poche",
             amount: 100,
             date: new Date("2024-03-08"),
-            budget: bartAccount,
+            account: bartAccount,
+            budget: null,
         },
         {
             title: "Argent de Poche",
             amount: 100,
             date: new Date("2024-03-08"),
-            budget: lisaAccount,
+            account: lisaAccount,
+            budget: null,
         },
         {
             title: "Argent de Poche",
             amount: 300,
             date: new Date("2024-03-08"),
-            budget: maggieAccount,
+            account: maggieAccount,
+            budget: null,
         },
     ]);
 
@@ -137,36 +152,43 @@ export async function seeder() {
         {
             title: "Moe's Tavern",
             description: "Bar de Moe",
-            amount: 1000,
-            user: homer,
+            amount: 500,
+            users: [homer],
         },
         {
             title: "Courses",
             description: "Courses de Marge",
             amount: 2500,
-            user: marge,
+            users: [homer, marge],
         },
     ]);
 
     await manager.save(budgets);
 
+    homer.budgets = [budgets[0], budgets[1]];
+    marge.budgets = [budgets[1]];
+    await manager.save([homer, marge]);
+
     const transactions = manager.create(Transaction, [
         {
             title: "Moe",
-            amount: 1000,
+            amount: 500,
             date: new Date("2024-03-08"),
+            account: homerAccount,
             budget: budgets[0],
         },
         {
             title: "Courses",
             amount: 2500,
             date: new Date("2024-03-08"),
+            account: communAccount,
             budget: budgets[1],
         },
         {
             title: "ardoise Moe",
-            amount: -300,
+            amount: -100,
             date: new Date("2024-03-08"),
+            account: homerAccount,
             budget: budgets[0],
         },
     ]);
