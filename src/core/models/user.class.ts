@@ -46,7 +46,7 @@ export class User {
 
     @ManyToMany(() => Account)
     @JoinTable()
-    public declare account: Account[];
+    public declare accounts: Account[];
 
     @ManyToMany(() => Budget, { nullable: true })
     @JoinTable()

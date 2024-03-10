@@ -1,5 +1,14 @@
 import { Router } from "express";
-import { deleteUser, getUserById, getUserByEmail, insertUser, updateUser, getUsersByGroupId, getUserAccount } from "../../core/database/utils/user.utils";
+import {
+    deleteUser,
+    getUserById,
+    getUserByEmail,
+    insertUser,
+    updateUser,
+    getUsersByGroupId,
+    getUserAccounts,
+    getUserBudgets,
+} from "../../core/database/utils/user.utils";
 
 export const userRouter = Router();
 
@@ -32,7 +41,7 @@ userRouter.get("/group/:groupId", async (request, response, next) => {
 
 userRouter.get("/account/:id", async (request, response, next) => {
     try {
-        const user = await getUserAccount(request.params.id);
+        const user = await getUserAccounts(request.params.id);
         response.send(user);
     } catch (err) {
         next(err);
@@ -41,7 +50,7 @@ userRouter.get("/account/:id", async (request, response, next) => {
 
 userRouter.get("/budget/:id", async (request, response, next) => {
     try {
-        const user = await getUserBudget(request.params.id);
+        const user = await getUserBudgets(request.params.id);
         response.send(user);
     } catch (err) {
         next(err);

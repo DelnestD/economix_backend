@@ -81,11 +81,11 @@ export async function seeder() {
 
     await manager.save([homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount]);
 
-    homer.account = [homerAccount, communAccount];
-    marge.account = [margeAccount, communAccount];
-    bart.account = [bartAccount];
-    lisa.account = [lisaAccount];
-    maggie.account = [maggieAccount];
+    homer.accounts = [homerAccount, communAccount];
+    marge.accounts = [margeAccount, communAccount];
+    bart.accounts = [bartAccount];
+    lisa.accounts = [lisaAccount];
+    maggie.accounts = [maggieAccount];
 
     await manager.save([homer, marge, bart, lisa, maggie]);
 

@@ -47,19 +47,19 @@ export async function getUsersByGroupId(groupId: string) {
     return foundEntities;
 }
 
-export async function getUserAccount(id: string) {
+export async function getUserAccounts(id: string) {
     const foundEntity = await DatabaseConnection.manager.findOne(User, {
         where: {
             id,
         },
-        relations: ["account"],
+        relations: ["accounts"],
     });
 
     if (!foundEntity) {
         throw new EntityNotFoundError();
     }
 
-    return foundEntity.account;
+    return foundEntity.accounts;
 }
 
 export async function getUserBudgets(id: string) {
