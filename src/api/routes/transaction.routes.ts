@@ -5,7 +5,7 @@ import {
     updateTransaction,
     deleteTransaction,
     getTransactionsByBudgetId,
-    getTransactionsByUserId,
+    getTransactionsByAccountId,
 } from "../../core/database/utils/transaction.utils";
 
 export const transactionRouter = Router();
@@ -28,9 +28,9 @@ transactionRouter.get("/budget/:budgetId", async (request, response, next) => {
     }
 });
 
-transactionRouter.get("/user/:userId", async (request, response, next) => {
+transactionRouter.get("/account/:accountId", async (request, response, next) => {
     try {
-        const transaction = await getTransactionsByUserId(request.params.userId);
+        const transaction = await getTransactionsByAccountId(request.params.accountId);
         response.send(transaction);
     } catch (err) {
         next(err);

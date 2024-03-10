@@ -1,16 +1,11 @@
 import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Budget } from "./budget.class";
-import { Account } from "./account.class";
+import { Transaction } from "./transaction.class";
+import { User } from "./user.class";
 
 @Entity()
-export class Transaction {
+export class Account {
     @PrimaryGeneratedColumn("uuid")
     public declare id: string;
-
-    @Column({
-        type: "date",
-    })
-    public declare date: Date;
 
     @Column({
         length: 100,
@@ -18,15 +13,16 @@ export class Transaction {
     public declare title: string;
 
     @Column({
-        type: "double",
+        type: "text",
+        nullable: true,
     })
-    public declare amount: number;
+    public declare description: string;
 
-    @ManyToOne(() => Account, (account) => account.transactions)
-    public declare account: Account;
+    @ManyToOne(() => User, (user) => user.budgets)
+    public declare user: User;
 
-    @ManyToOne(() => Budget, (budget) => budget.transactions, { nullable: true })
-    public declare budget: Budget | null;
+    @OneToOne(() => Transaction, (transaction) => transaction.account, { nullable: true })
+    public declare transactions: Transaction[] | null;
 
     @Column({
         type: "timestamp",

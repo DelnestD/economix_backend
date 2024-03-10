@@ -26,7 +26,7 @@ export class Budget {
     @ManyToOne(() => User, (user) => user.budgets)
     public declare user: User;
 
-    @OneToOne(() => Transaction, (transaction) => transaction.budget)
+    @OneToOne(() => Transaction, (transaction) => transaction.budget, { nullable: true })
     public declare transactions: Transaction[] | null;
 
     @Column({

@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Group } from "./group.class";
 import { Budget } from "./budget.class";
+import { Account } from "./account.class";
 
 export enum Role {
     LEADER = "leader",
@@ -44,8 +45,11 @@ export class User {
     @ManyToOne(() => Group, (group) => group.users, { nullable: true })
     public declare group: Group | null;
 
-    @OneToOne(() => Budget, (budget) => budget.user)
-    public declare budgets: Budget[];
+    @OneToOne(() => Account, (account) => account.user)
+    public declare account: Account[];
+
+    @OneToOne(() => Budget, (budget) => budget.user, { nullable: true })
+    public declare budgets: Budget[] | null;
 
     @Column({
         type: "timestamp",
