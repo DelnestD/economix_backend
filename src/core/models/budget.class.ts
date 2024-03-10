@@ -23,9 +23,6 @@ export class Budget {
     })
     public declare amount: number;
 
-    @ManyToOne(() => User, (user) => user.budgets)
-    public declare user: User;
-
     @OneToOne(() => Transaction, (transaction) => transaction.budget, { nullable: true })
     public declare transactions: Transaction[] | null;
 

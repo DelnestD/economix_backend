@@ -1,7 +1,6 @@
 import { EntityNotFoundError } from "../../../api/error/types.error";
 import { Budget } from "../../models/budget.class";
 import { DatabaseConnection } from "../connection";
-import { getUserById } from "./user.utils";
 
 export async function getBudgetById(id: string) {
     const foundEntity = await DatabaseConnection.manager.findOne(Budget, {
@@ -15,22 +14,6 @@ export async function getBudgetById(id: string) {
     }
 
     return foundEntity;
-}
-
-export async function getBudgetByUserId(userId: string) {
-    const foundUser = await getUserById(userId);
-
-    const foundEntities = await DatabaseConnection.manager.find(Budget, {
-        where: {
-            user: foundUser,
-        },
-    });
-
-    if (!foundEntities || foundEntities.length === 0) {
-        throw new EntityNotFoundError();
-    }
-
-    return foundEntities;
 }
 
 export async function insertBudget(body: Object) {

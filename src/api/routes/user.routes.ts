@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUser, getUserById, getUserByEmail, insertUser, updateUser, getUsersByGroupId } from "../../core/database/utils/user.utils";
+import { deleteUser, getUserById, getUserByEmail, insertUser, updateUser, getUsersByGroupId, getUserAccount } from "../../core/database/utils/user.utils";
 
 export const userRouter = Router();
 
@@ -30,6 +30,24 @@ userRouter.get("/group/:groupId", async (request, response, next) => {
     }
 });
 
+userRouter.get("/account/:id", async (request, response, next) => {
+    try {
+        const user = await getUserAccount(request.params.id);
+        response.send(user);
+    } catch (err) {
+        next(err);
+    }
+});
+
+userRouter.get("/budget/:id", async (request, response, next) => {
+    try {
+        const user = await getUserBudget(request.params.id);
+        response.send(user);
+    } catch (err) {
+        next(err);
+    }
+});
+
 userRouter.post("/", async (request, response) => {
     response.send(await insertUser(request.body));
 });
@@ -47,3 +65,6 @@ userRouter.delete("/:id", async (request, response) => {
     await deleteUser(request.params.id);
     response.status(204).send(null);
 });
+function getUserBudget(id: string) {
+    throw new Error("Function not implemented.");
+}

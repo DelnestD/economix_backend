@@ -18,9 +18,6 @@ export class Account {
     })
     public declare description: string;
 
-    @ManyToOne(() => User, (user) => user.budgets)
-    public declare user: User;
-
     @OneToOne(() => Transaction, (transaction) => transaction.account, { nullable: true })
     public declare transactions: Transaction[] | null;
 

@@ -47,6 +47,36 @@ export async function getUsersByGroupId(groupId: string) {
     return foundEntities;
 }
 
+export async function getUserAccount(id: string) {
+    const foundEntity = await DatabaseConnection.manager.findOne(User, {
+        where: {
+            id,
+        },
+        relations: ["account"],
+    });
+
+    if (!foundEntity) {
+        throw new EntityNotFoundError();
+    }
+
+    return foundEntity.account;
+}
+
+export async function getUserBudgets(id: string) {
+    const foundEntity = await DatabaseConnection.manager.findOne(User, {
+        where: {
+            id,
+        },
+        relations: ["budgets"],
+    });
+
+    if (!foundEntity) {
+        throw new EntityNotFoundError();
+    }
+
+    return foundEntity.budgets;
+}
+
 export async function insertUser(body: Object) {
     const user = DatabaseConnection.manager.create(User, body);
     await DatabaseConnection.manager.save(user);

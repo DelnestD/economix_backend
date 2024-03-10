@@ -2,7 +2,7 @@ import { EntityNotFoundError } from "../../../api/error/types.error";
 import { Transaction } from "../../models/transaction.class";
 import { DatabaseConnection } from "../connection";
 import { getAccountById } from "./account.utils";
-import { getBudgetById, getBudgetByUserId } from "./budget.utils";
+import { getBudgetById } from "./budget.utils";
 
 export async function getTransactionById(id: string) {
     const foundEntity = await DatabaseConnection.manager.findOne(Transaction, {

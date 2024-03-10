@@ -1,20 +1,11 @@
 import { Router } from "express";
-import { getBudgetById, insertBudget, updateBudget, deleteBudget, getBudgetByUserId } from "../../core/database/utils/budget.utils";
+import { getBudgetById, insertBudget, updateBudget, deleteBudget } from "../../core/database/utils/budget.utils";
 
 export const budgetRouter = Router();
 
 budgetRouter.get("/:id", async (request, response, next) => {
     try {
         const budget = await getBudgetById(request.params.id);
-        response.send(budget);
-    } catch (err) {
-        next(err);
-    }
-});
-
-budgetRouter.get("/user/:userId", async (request, response, next) => {
-    try {
-        const budget = await getBudgetByUserId(request.params.userId);
         response.send(budget);
     } catch (err) {
         next(err);
