@@ -5,12 +5,15 @@ import { userRouter } from "./routes/user.routes";
 import { groupRouter } from "./routes/group.routes";
 import { budgetRouter } from "./routes/budget.routes";
 import { transactionRouter } from "./routes/transaction.routes";
+import { authRouter } from "./routes/auth.routes";
+import bcrypt from "bcrypt";
 
 const PORT = 8081;
 
 export function initApi() {
     const application: Application = express();
     application.use(json());
+    application.use("/auth", authRouter);
     application.use("/user", userRouter);
     application.use("/group", groupRouter);
     application.use("/budget", budgetRouter);
