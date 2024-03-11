@@ -74,6 +74,3 @@ userRouter.delete("/:id", async (request, response) => {
     await deleteUser(request.params.id);
     response.status(204).send(null);
 });
-function getUserBudget(id: string) {
-    throw new Error("Function not implemented.");
-}
