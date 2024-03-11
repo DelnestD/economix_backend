@@ -5,6 +5,7 @@ import { userRouter } from "./routes/user.routes";
 import { groupRouter } from "./routes/group.routes";
 import { budgetRouter } from "./routes/budget.routes";
 import { transactionRouter } from "./routes/transaction.routes";
+import { accountRouter } from "./routes/account.routes";
 
 const PORT = 8081;
 
@@ -13,6 +14,7 @@ export function initApi() {
     application.use(json());
     application.use("/user", userRouter);
     application.use("/group", groupRouter);
+    application.use("/account", accountRouter);
     application.use("/budget", budgetRouter);
     application.use("/transaction", transactionRouter);
     application.use((request, response, next) => {
