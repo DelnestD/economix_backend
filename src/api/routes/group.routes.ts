@@ -1,31 +1,49 @@
 import { Router } from "express";
-import { deleteGroup, getGroupById, insertGroup, updateGroup } from "../../core/database/utils/group.utils";
+import {
+  deleteGroup,
+  getGroupById,
+  insertGroup,
+  updateGroup,
+} from "../../core/database/utils/group.utils";
+import { authorizeMiddleWare } from "../middlewares/authorize.middleware";
 
 export const groupRouter = Router();
 
-groupRouter.get("/:id", async (request, response, next) => {
+groupRouter.get(
+  "/:id",
+  authorizeMiddleWare([]),
+  async (request, response, next) => {
     try {
-        const group = await getGroupById(request.params.id);
-        response.send(group);
+      const group = await getGroupById(request.params.id);
+      response.send(group);
     } catch (err) {
-        next(err);
+      next(err);
     }
+  }
+);
+
+groupRouter.post("/", authorizeMiddleWare([]), async (request, response) => {
+  response.send(await insertGroup(request.body));
 });
 
-groupRouter.post("/", async (request, response) => {
-    response.send(await insertGroup(request.body));
-});
-
-groupRouter.patch("/:id", async (request, response, next) => {
+groupRouter.patch(
+  "/:id",
+  authorizeMiddleWare([]),
+  async (request, response, next) => {
     try {
-        const group = await updateGroup(request.params.id, request.body);
-        response.send(group);
+      const group = await updateGroup(request.params.id, request.body);
+      response.send(group);
     } catch (err) {
-        next(err);
+      next(err);
     }
-});
+  }
+);
 
-groupRouter.delete("/:id", async (request, response) => {
+groupRouter.delete(
+  "/:id",
+  authorizeMiddleWare([]),
+  async (request, response) => {
     await deleteGroup(request.params.id);
     response.status(204).send(null);
-});
+  }
+);
