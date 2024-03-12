@@ -25,7 +25,7 @@ export async function getUserByEmail(email: string) {
     });
 
     if (!foundEntity) {
-        throw new EntityNotFoundError();
+        return null;
     }
 
     return foundEntity;
