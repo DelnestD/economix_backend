@@ -18,13 +18,17 @@ authRouter.post("/login", async (request, response, next) => {
         return next(new LoginFailedError("Email ou mot de passe incorrect"));
     }
 
-    const expireDate = new Date(Date.now() + 300000);
+    const dateUTC1 = Date.now() + 3600000;
+
+    const minutesBeforeExpire = 5;
+
+    const expireDate = new Date(dateUTC1 + minutesBeforeExpire * 60000);
 
     const accessToken = sign(
         {
             id: user.id,
-            iat: Math.floor(new Date().getTime() / 1000),
-            exp: Math.floor(new Date().getTime() / 1000 + 300),
+            iat: Math.floor(dateUTC1 / 1000),
+            exp: Math.floor(dateUTC1 / 1000 + minutesBeforeExpire * 60),
         },
         process.env.JWT_SECRET!
     );
