@@ -20,7 +20,7 @@ authRouter.post("/login", async (request, response, next) => {
 
     const dateUTC1 = Date.now() + 3600000;
 
-    const minutesBeforeExpire = 5;
+    const minutesBeforeExpire = 60;
 
     const expireDate = new Date(dateUTC1 + minutesBeforeExpire * 60000);
 
