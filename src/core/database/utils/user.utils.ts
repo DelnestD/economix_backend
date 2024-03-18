@@ -23,6 +23,7 @@ export async function getUserByEmail(email: string) {
         where: {
             email,
         },
+        relations: ["group"],
     });
 
     if (!foundEntity) {
