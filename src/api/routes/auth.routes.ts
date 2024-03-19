@@ -3,6 +3,7 @@ import { Router } from "express";
 import { sign } from "jsonwebtoken";
 import { LoginFailedError } from "../error/types.error";
 import { getUserByEmail, insertUser } from "../../core/database/utils/user.utils";
+import { insertAccount } from "../../core/database/utils/account.utils";
 
 export const authRouter = Router();
 
@@ -58,8 +59,11 @@ authRouter.post("/register", async (request, response, next) => {
                 return response.status(500);
             } else {
                 body.password = hash;
-                insertUser(body);
-                response.status(200).send(body);
+                insertAccount({ title: "Compte courant", description: "Compte créer par défaut" }).then((account) => {
+                    body.accounts = [account];
+                    insertUser(body);
+                    response.status(200).send(body);
+                });
             }
         });
     }
