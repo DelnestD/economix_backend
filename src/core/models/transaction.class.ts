@@ -22,6 +22,11 @@ export class Transaction {
     })
     public declare amount: number;
 
+    @Column({
+        type: "boolean",
+    })
+    public declare isRefill: boolean;
+
     @ManyToOne(() => Account, (account) => account.transactions)
     public declare account: Account;
 

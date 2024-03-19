@@ -18,11 +18,6 @@ export class Budget {
     })
     public declare description: string;
 
-    @Column({
-        type: "double",
-    })
-    public declare amount: number;
-
     @OneToOne(() => Transaction, (transaction) => transaction.budget, { nullable: true })
     public declare transactions: Transaction[] | null;
 

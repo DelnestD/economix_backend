@@ -8,7 +8,7 @@ export async function getUserById(id: string) {
         where: {
             id,
         },
-        relations: ["group"],
+        relations: ["group", "accounts", "budgets"],
     });
 
     if (!foundEntity) {
