@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import { sign } from "jsonwebtoken";
-import { LoginFailedError } from "../error/types.error";
+import { EntityNotFoundError, LoginFailedError } from "../error/types.error";
 import {
     getUserByEmail,
     insertUser,

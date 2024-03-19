@@ -1,4 +1,5 @@
 import { EntityNotFoundError } from "../../../api/error/types.error";
+import { Account } from "../../models/account.class";
 import { User } from "../../models/user.class";
 import { DatabaseConnection } from "../connection";
 import { getGroupById } from "./group.utils";
@@ -8,7 +9,7 @@ export async function getUserById(id: string) {
         where: {
             id,
         },
-        relations: ["group"],
+        relations: ["group", "accounts", "budgets"],
     });
 
     if (!foundEntity) {
