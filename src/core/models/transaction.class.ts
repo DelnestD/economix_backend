@@ -24,6 +24,7 @@ export class Transaction {
 
     @Column({
         type: "boolean",
+        default: false,
     })
     public declare isRefill: boolean;
 
