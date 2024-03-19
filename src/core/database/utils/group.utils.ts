@@ -24,7 +24,7 @@ export async function insertGroup(body: Object) {
 
 export async function updateGroup(id: string, body: Object) {
     const group = await getGroupById(id);
-    Object.assign(Group, body);
+    Object.assign(group, body);
     await DatabaseConnection.manager.save(group);
     return group;
 }

@@ -8,6 +8,7 @@ export async function getUserById(id: string) {
         where: {
             id,
         },
+        relations: ["group"],
     });
 
     if (!foundEntity) {
@@ -22,6 +23,7 @@ export async function getUserByEmail(email: string) {
         where: {
             email,
         },
+        relations: ["group"],
     });
 
     if (!foundEntity) {

@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import { sign } from "jsonwebtoken";
+import { LoginFailedError } from "../error/types.error";
 import {
     getUserByEmail,
     insertUser,
@@ -14,10 +15,10 @@ authRouter.post("/login", async (request, response, next) => {
     const user = await getUserByEmail(email);
 
     if (!user) {
-        return response.status(403).send("Mot de passe ou email incorrect.");
+        return next(new EntityNotFoundError("Mot de passe ou email incorrect"));
     }
     if (!(await bcrypt.compare(password, user.password))) {
-        return response.status(403).send("Mot de passe ou email incorrect !");
+        return next(new EntityNotFoundError("Mot de passe ou email incorrect"));
     }
 
     const accessToken = sign(
@@ -42,21 +43,20 @@ authRouter.post("/login", async (request, response, next) => {
 authRouter.post("/register", async (request, response, next) => {
     const body = request.body;
 
-    const user = await getUserByEmail(body.email);
-    if (user) {
-        return response.status(409).json({
+    try {
+        await getUserByEmail(body.email);
+        response.status(409).json({
             message: "Mail exists",
         });
+    } catch (error) {
+        bcrypt.hash(body.password, 10, (err, hash) => {
+            if (err) {
+                return response.status(500);
+            } else {
+                body.password = hash;
+                insertUser(body);
+                response.status(200).send(body);
+            }
+        });
     }
-
-    bcrypt.hash(body.password, 10, (err, hash) => {
-        if (err) {
-            return response.status(500);
-        } else {
-            body.password = hash;
-            insertUser(body);
-            body.password = "";
-            return response.status(200).send(body);
-        }
-    });
 });
