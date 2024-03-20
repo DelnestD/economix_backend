@@ -8,141 +8,95 @@ import { Account } from "../models/account.class";
 export async function seeder() {
     const manager = DatabaseConnection.manager;
 
-    const [homer, marge, bart, lisa, maggie] = manager.create(User, [
+    //? famille leblond
+
+    const [patrick, andrea, françois] = manager.create(User, [
         {
-            email: "homer@simpsons.com",
-            firstName: "Homer",
-            lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
-            role: Role.LEADER,
+            lastName: "Leblond",
+            firstName: "Patrick",
+            email: "patrick.leblond@triptok.be",
+            password: "$2a$10$j/v57yS2XTg9tDaXDNYH0u2mwUjpOZsY6MMyJV2DEs9gd9zSkvBSK",
             group: null,
         },
         {
-            email: "marge@simpsons.com",
-            firstName: "Marge",
-            lastName: "Bouvier",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
-            role: Role.LEADER,
+            lastName: "Cefora",
+            firstName: "Andrea",
+            email: "andrea.cefora@live.be",
+            password: "$2a$10$DZf0loOx4LfGdtUUmCtv8OJzb0RUuVGqH03zr.sugcMqrUTuY7cpa",
             group: null,
         },
         {
-            email: "bart@simpsons.com",
-            firstName: "Bart",
-            lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
-            role: Role.MEMBER,
-            group: null,
-        },
-        {
-            email: "lisa@simpsons.com",
-            firstName: "Lisa",
-            lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
-            role: Role.MEMBER,
-            group: null,
-        },
-        {
-            email: "maggie@simpsons.com",
-            firstName: "Maggie",
-            lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
-            role: Role.MEMBER,
+            lastName: "Leblond",
+            firstName: "François",
+            email: "françois.leblond@gmail.com",
+            password: "$2a$10$p6Cn4orPK.HV4k6FXRNKG.pIMZknFPRE7sJzfwZral1HmqnoZyUbC",
             group: null,
         },
     ]);
-    await manager.save([homer, marge, bart, lisa, maggie]);
 
-    const [homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Account, [
+    await manager.save([patrick, andrea, françois]);
+
+    const [patrickAccount, andreaAccount, françoisAccount] = manager.create(Account, [
         {
             title: "Compte courant",
-            description: "compte courant d'homer",
+            description: "Compte créer par défaut",
         },
         {
             title: "Compte courant",
-            description: "compte courant de marge",
-        },
-        {
-            title: "Compte Commun",
-            description: "Compte commun de la famille Simpson",
+            description: "Compte créer par défaut",
         },
         {
             title: "Compte courant",
-            description: "compte courant de bart",
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de lisa",
-        },
-        {
-            title: "Compte courant",
-            description: "compte courant de maggie",
+            description: "Compte créer par défaut",
         },
     ]);
 
-    await manager.save([homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount]);
+    await manager.save([patrickAccount, andreaAccount, françoisAccount]);
 
-    homer.accounts = [homerAccount, communAccount];
-    marge.accounts = [margeAccount, communAccount];
-    bart.accounts = [bartAccount];
-    lisa.accounts = [lisaAccount];
-    maggie.accounts = [maggieAccount];
+    patrick.accounts = [patrickAccount];
+    andrea.accounts = [andreaAccount];
+    françois.accounts = [françoisAccount];
 
-    await manager.save([homer, marge, bart, lisa, maggie]);
+    await manager.save([patrick, andrea, françois]);
 
-    const simpson = manager.create(Group, {
-        name: "Famille Simpson",
+    const leblond = manager.create(Group, {
+        name: "Leblond",
     });
-    await manager.save(simpson);
 
-    homer.group = simpson;
-    marge.group = simpson;
-    bart.group = simpson;
-    lisa.group = simpson;
-    maggie.group = simpson;
-    await manager.save([homer, marge, bart, lisa, maggie]);
+    await manager.save(leblond);
+
+    patrick.group = leblond;
+    patrick.role = Role.LEADER;
+    andrea.group = leblond;
+    andrea.role = Role.LEADER;
+    françois.group = leblond;
+    françois.role = Role.MEMBER;
+    await manager.save([patrick, andrea, françois]);
 
     const transaction = manager.create(Transaction, [
         {
             title: "Salaire",
             amount: 1000,
             date: new Date("2024-03-08"),
-            account: homerAccount,
+            account: patrickAccount,
             budget: null,
+            isRefill: false,
         },
         {
-            title: "Argent de Poche",
+            title: "Salaire",
             amount: 1000,
             date: new Date("2024-03-08"),
-            account: margeAccount,
+            account: andreaAccount,
             budget: null,
-        },
-        {
-            title: "Argent Courses + Factures",
-            amount: 4000,
-            date: new Date("2024-03-08"),
-            account: communAccount,
-            budget: null,
+            isRefill: false,
         },
         {
             title: "Argent de Poche",
             amount: 100,
             date: new Date("2024-03-08"),
-            account: bartAccount,
+            account: françoisAccount,
             budget: null,
-        },
-        {
-            title: "Argent de Poche",
-            amount: 100,
-            date: new Date("2024-03-08"),
-            account: lisaAccount,
-            budget: null,
-        },
-        {
-            title: "Argent de Poche",
-            amount: 300,
-            date: new Date("2024-03-08"),
-            account: maggieAccount,
-            budget: null,
+            isRefill: false,
         },
     ]);
 
@@ -150,49 +104,85 @@ export async function seeder() {
 
     const budgets = manager.create(Budget, [
         {
-            title: "Moe's Tavern",
-            description: "Bar de Moe",
-            users: [homer],
+            title: "Sortie",
+            description: "Sortie entre amis",
+            users: [françois],
         },
         {
             title: "Courses",
-            description: "Courses de Marge",
-            users: [homer, marge],
+            description: "Courses de la semaine",
+            users: [patrick],
+        },
+        {
+            title: "Maison",
+            description: "Dépenses pour la maison",
+            users: [andrea],
         },
     ]);
 
     await manager.save(budgets);
 
-    homer.budgets = [budgets[0], budgets[1]];
-    marge.budgets = [budgets[1]];
-    await manager.save([homer, marge]);
+    patrick.budgets = [budgets[1]];
+    andrea.budgets = [budgets[2]];
+    françois.budgets = [budgets[0]];
+    await manager.save([patrick, andrea, françois]);
 
     const transactions = manager.create(Transaction, [
         {
-            title: "Moe",
-            amount: -500,
+            title: "Sortie",
+            amount: -50,
             date: new Date("2024-03-08"),
-            account: homerAccount,
+            account: françoisAccount,
             budget: budgets[0],
             isRefill: true,
         },
         {
-            title: "Courses",
-            amount: -2500,
+            title: "Reapprovisionnement Maison",
+            amount: -1000,
             date: new Date("2024-03-08"),
-            account: communAccount,
+            account: andreaAccount,
+            budget: budgets[2],
+            isRefill: true,
+        },
+        {
+            title: "Reapprovisionnement Courses",
+            amount: -300,
+            date: new Date("2024-03-08"),
+            account: patrickAccount,
             budget: budgets[1],
             isRefill: true,
         },
         {
-            title: "ardoise Moe",
+            title: "cinema",
+            amount: -20,
+            date: new Date("2024-03-10"),
+            account: françoisAccount,
+            budget: budgets[0],
+            isRefill: false,
+        },
+        {
+            title: "deco",
+            amount: -200,
+            date: new Date("2024-03-09"),
+            account: andreaAccount,
+            budget: budgets[2],
+            isRefill: false,
+        },
+        {
+            title: "courses",
             amount: -100,
             date: new Date("2024-03-08"),
-            account: homerAccount,
-            budget: budgets[0],
+            account: patrickAccount,
+            budget: budgets[1],
             isRefill: false,
         },
     ]);
 
     await manager.save(transactions);
+
+    //? collocation
+
+    //? solo
+
+    //? solo
 }
