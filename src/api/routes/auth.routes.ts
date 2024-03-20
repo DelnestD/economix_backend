@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import { sign } from "jsonwebtoken";
-import { EntityNotFoundError, LoginFailedError } from "../error/types.error";
+import { LoginFailedError } from "../error/types.error";
 import {
     getUserByEmail,
     insertUser,
 } from "../../core/database/utils/user.utils";
+import { insertAccount } from "../../core/database/utils/account.utils";
 
 export const authRouter = Router();
 
@@ -15,28 +16,35 @@ authRouter.post("/login", async (request, response, next) => {
     const user = await getUserByEmail(email);
 
     if (!user) {
-        return next(new EntityNotFoundError("Mot de passe ou email incorrect"));
+        return next(new LoginFailedError("Email ou mot de passe incorrect"));
     }
     if (!(await bcrypt.compare(password, user.password))) {
-        return next(new EntityNotFoundError("Mot de passe ou email incorrect"));
+        return next(new LoginFailedError("Email ou mot de passe incorrect"));
     }
+
+    const dateUTC1 = Date.now() + 3600000;
+
+    const minutesBeforeExpire = 60;
+
+    const expireDate = new Date(dateUTC1 + minutesBeforeExpire * 60000);
 
     const accessToken = sign(
         {
             id: user.id,
-            iat: Math.floor(new Date().getTime() / 1000),
-            exp: Math.floor(new Date().getTime() / 1000 + 300),
+            iat: Math.floor(dateUTC1 / 1000),
+            exp: Math.floor(dateUTC1 / 1000 + minutesBeforeExpire * 60),
         },
         process.env.JWT_SECRET!
     );
 
     response.cookie("accessToken", accessToken, {
-        expires: new Date(Date.now() + 300000),
+        expires: expireDate,
         httpOnly: true,
     });
 
     response.send({
         accessToken,
+        expires: expireDate,
     });
 });
 
@@ -54,8 +62,14 @@ authRouter.post("/register", async (request, response, next) => {
                 return response.status(500);
             } else {
                 body.password = hash;
-                insertUser(body);
-                response.status(200).send(body);
+                insertAccount({
+                    title: "Compte courant",
+                    description: "Compte créer par défaut",
+                }).then((account) => {
+                    body.accounts = [account];
+                    insertUser(body);
+                    response.status(200).send(body);
+                });
             }
         });
     }
