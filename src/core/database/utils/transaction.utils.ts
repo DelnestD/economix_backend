@@ -9,6 +9,7 @@ export async function getTransactionById(id: string) {
         where: {
             id,
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntity) {
@@ -29,6 +30,7 @@ export async function getTransactionsByBudgetId(budgetId: string) {
             date: "DESC",
             createdAt: "DESC",
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntities) {
@@ -49,6 +51,7 @@ export async function getTransactionsByAccountId(accountId: string) {
             date: "DESC",
             createdAt: "DESC",
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntities) {
@@ -58,8 +61,24 @@ export async function getTransactionsByAccountId(accountId: string) {
     return foundEntities;
 }
 
-export async function insertTransaction(body: Object) {
-    const transaction = DatabaseConnection.manager.create(Transaction, body);
+export async function insertTransaction(body: {
+    date: string;
+    title: string;
+    amount: number;
+    account: { id: string };
+    budget: { id: string } | null;
+    isRefill: boolean;
+}) {
+    const dateFormated = new Date(body.date);
+    const object = {
+        date: dateFormated,
+        title: body.title,
+        amount: body.amount,
+        account: body.account,
+        budget: body.budget,
+        isRefill: body.isRefill,
+    };
+    const transaction = DatabaseConnection.manager.create(Transaction, object);
     await DatabaseConnection.manager.save(transaction);
     return transaction;
 }

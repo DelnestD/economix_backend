@@ -13,7 +13,8 @@ export async function seeder() {
             email: "homer@simpsons.com",
             firstName: "Homer",
             lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
+            password:
+                "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
             role: Role.LEADER,
             group: null,
         },
@@ -21,7 +22,8 @@ export async function seeder() {
             email: "marge@simpsons.com",
             firstName: "Marge",
             lastName: "Bouvier",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
+            password:
+                "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
             role: Role.LEADER,
             group: null,
         },
@@ -29,7 +31,8 @@ export async function seeder() {
             email: "bart@simpsons.com",
             firstName: "Bart",
             lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
+            password:
+                "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
             role: Role.MEMBER,
             group: null,
         },
@@ -37,7 +40,8 @@ export async function seeder() {
             email: "lisa@simpsons.com",
             firstName: "Lisa",
             lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
+            password:
+                "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
             role: Role.MEMBER,
             group: null,
         },
@@ -45,14 +49,22 @@ export async function seeder() {
             email: "maggie@simpsons.com",
             firstName: "Maggie",
             lastName: "Simpson",
-            password: "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
+            password:
+                "$2b$10$KGwjqJ6rWa5GBoAiFegu/./beJ8nDQCZBWqSTIKL84hUlNY4DtEXa",
             role: Role.MEMBER,
             group: null,
         },
     ]);
     await manager.save([homer, marge, bart, lisa, maggie]);
 
-    const [homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount] = manager.create(Account, [
+    const [
+        homerAccount,
+        margeAccount,
+        communAccount,
+        bartAccount,
+        lisaAccount,
+        maggieAccount,
+    ] = manager.create(Account, [
         {
             title: "Compte courant",
             description: "compte courant d'homer",
@@ -79,7 +91,14 @@ export async function seeder() {
         },
     ]);
 
-    await manager.save([homerAccount, margeAccount, communAccount, bartAccount, lisaAccount, maggieAccount]);
+    await manager.save([
+        homerAccount,
+        margeAccount,
+        communAccount,
+        bartAccount,
+        lisaAccount,
+        maggieAccount,
+    ]);
 
     homer.accounts = [homerAccount, communAccount];
     marge.accounts = [margeAccount, communAccount];
