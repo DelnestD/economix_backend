@@ -9,6 +9,7 @@ export async function getTransactionById(id: string) {
         where: {
             id,
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntity) {
@@ -29,6 +30,7 @@ export async function getTransactionsByBudgetId(budgetId: string) {
             date: "DESC",
             createdAt: "DESC",
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntities) {
@@ -49,6 +51,7 @@ export async function getTransactionsByAccountId(accountId: string) {
             date: "DESC",
             createdAt: "DESC",
         },
+        relations: ["account", "budget"],
     });
 
     if (!foundEntities) {
