@@ -31,7 +31,7 @@ export async function getTransactionsByBudgetId(budgetId: string) {
         },
     });
 
-    if (!foundEntities || foundEntities.length === 0) {
+    if (!foundEntities) {
         throw new EntityNotFoundError();
     }
 
@@ -51,7 +51,7 @@ export async function getTransactionsByAccountId(accountId: string) {
         },
     });
 
-    if (!foundEntities || foundEntities.length === 0) {
+    if (!foundEntities) {
         throw new EntityNotFoundError();
     }
 
