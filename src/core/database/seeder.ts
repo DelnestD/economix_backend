@@ -15,47 +15,41 @@ export async function seeder() {
             lastName: "Leblond",
             firstName: "Patrick",
             email: "patrick.leblond@triptok.be",
-            password:
-                "$2a$10$j/v57yS2XTg9tDaXDNYH0u2mwUjpOZsY6MMyJV2DEs9gd9zSkvBSK",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
         {
             lastName: "Cefora",
             firstName: "Andrea",
             email: "andrea.cefora@live.be",
-            password:
-                "$2a$10$DZf0loOx4LfGdtUUmCtv8OJzb0RUuVGqH03zr.sugcMqrUTuY7cpa",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
         {
             lastName: "Leblond",
             firstName: "François",
             email: "francois.leblond@gmail.com",
-            password:
-                "$2a$10$p6Cn4orPK.HV4k6FXRNKG.pIMZknFPRE7sJzfwZral1HmqnoZyUbC",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
     ]);
 
     await manager.save([patrick, andrea, françois]);
 
-    const [patrickAccount, andreaAccount, françoisAccount] = manager.create(
-        Account,
-        [
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-        ]
-    );
+    const [patrickAccount, andreaAccount, françoisAccount] = manager.create(Account, [
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+    ]);
 
     await manager.save([patrickAccount, andreaAccount, françoisAccount]);
 
@@ -201,47 +195,41 @@ export async function seeder() {
             lastName: "Lebrun",
             firstName: "Brenda",
             email: "brenda.lebrun@hotmail.com",
-            password:
-                "$2a$10$75cnmO/EDFamlImEGycq7.gV56dbupVHb47ksjw8Eo9MtxDpHWrmG",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
         {
             lastName: "Larousse",
             firstName: "Audrey",
             email: "audrey.larousse@gmail.com",
-            password:
-                "$2a$10$WOGRxtBQqXVuOjL5ZN7.2.hv8eGIJM75410S/6ZkBn3fB1rl5BWT2",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
         {
             lastName: "Lamenace",
             firstName: "Maxime",
             email: "maxou.lamenace@outlook.com",
-            password:
-                "$2a$10$FbnmToeZg0BwijEVX3hHVewYCSrDlC5JmjnwGRu/FEmLmuMz2nloG",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
     ]);
 
     await manager.save([brenda, audrey, maxime]);
 
-    const [brendaAccount, audreyAccount, maximeAccount] = manager.create(
-        Account,
-        [
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-            {
-                title: "Compte courant",
-                description: "Compte créer par défaut",
-            },
-        ]
-    );
+    const [brendaAccount, audreyAccount, maximeAccount] = manager.create(Account, [
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+        {
+            title: "Compte courant",
+            description: "Compte créer par défaut",
+        },
+    ]);
 
     await manager.save([brendaAccount, audreyAccount, maximeAccount]);
 
@@ -380,8 +368,7 @@ export async function seeder() {
         lastName: "Lamalice",
         firstName: "Denis",
         email: "denis.lamalice@outlook.com",
-        password:
-            "$2a$10$TNB/zA6SxiKw3PmCvspj8O.5eDSGIUf93apPU4c2cxtkWWyCQkGNK",
+        password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
         group: null,
     });
 
@@ -479,8 +466,7 @@ export async function seeder() {
         lastName: "Laloutre",
         firstName: "Romain",
         email: "romain.laloutre@triptok.be",
-        password:
-            "$2a$10$qwx.Oq69Id1mgU7cKQsgKenZrX6r1kqxvrDFrxQ4Qob6gZ8fY6dv6",
+        password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
         group: null,
     });
 
@@ -566,68 +552,54 @@ export async function seeder() {
 
     //? lien avec comix de l'autre groupe
     //? famille ch'nord (petite huguette)
-    const [huguette, hector, henry, kevin, jeanEudes, gneeeeeh] =
-        manager.create(User, [
-            {
-                lastName: "la Petite",
-                firstName: "Huguette",
-                email: "la-petite-huguette@yahoo.fr",
-                password:
-                    "$2a$10$jMr6qpzMVzMsHFlTexNBxeBc1v3FVv/Xbmnzyo9/M7ciIqJg4uJVm",
-                group: null,
-            },
-            {
-                lastName: "ch'nord",
-                firstName: "Hector",
-                email: "Hector-du-nord@nordExpress.fr",
-                password:
-                    "$2a$10$1D9lBEcHxfHfIOsXbTSLMewuJUOUx/Htnb1CMA/0Y4iwSv6QHgj8q",
-                group: null,
-            },
-            {
-                lastName: "ch'nord",
-                firstName: "Henry",
-                email: "Henry-chanteur@nordExpress.fr",
-                password:
-                    "$2a$10$hnHoUtOkbYS2.WVJ.CwKCu6GqgRzjoc13UizGGvCaI7DgHT1szRc6",
-                group: null,
-            },
-            {
-                lastName: "ch'nord",
-                firstName: "Kevin",
-                email: "johnny-du-59@keketuning.fr",
-                password:
-                    "$2a$10$yIzI/EkCryeH14KqQbNFaeK8A3NmdYf3COBYizSSQ5GYW2tm9/WCO",
-                group: null,
-            },
-            {
-                lastName: "ch'nord",
-                firstName: "Jean-Eudes",
-                email: "je86@TS21.fr",
-                password:
-                    "$2a$10$QqRprwuv3MTRJVz1IAQ3iu8xBAvKBSeshvZ0VKu5Puquj851TX54i",
-                group: null,
-            },
-            {
-                lastName: "ch'nord",
-                firstName: "Gneeeeeh",
-                email: "gneeeeeh@TS21.fr",
-                password:
-                    "$2a$10$QqRprwuv3MTRJVz1IAQ3iu8xBAvKBSeshvZ0VKu5Puquj851TX54i",
-                group: null,
-            },
-        ]);
+    const [huguette, hector, henry, kevin, jeanEudes, gneeeeeh] = manager.create(User, [
+        {
+            lastName: "la Petite",
+            firstName: "Huguette",
+            email: "la-petite-huguette@yahoo.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+        {
+            lastName: "ch'nord",
+            firstName: "Hector",
+            email: "Hector-du-nord@nordExpress.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+        {
+            lastName: "ch'nord",
+            firstName: "Henry",
+            email: "Henry-chanteur@nordExpress.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+        {
+            lastName: "ch'nord",
+            firstName: "Kevin",
+            email: "johnny-du-59@keketuning.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+        {
+            lastName: "ch'nord",
+            firstName: "Jean-Eudes",
+            email: "je86@TS21.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+        {
+            lastName: "ch'nord",
+            firstName: "Gneeeeeh",
+            email: "gneeeeeh@TS21.fr",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
+            group: null,
+        },
+    ]);
 
     await manager.save([huguette, hector, henry, kevin, jeanEudes, gneeeeeh]);
 
-    const [
-        huguetteAccount,
-        hectorAccount,
-        henryAccount,
-        kevinAccount,
-        jeanEudesAccount,
-        gneeeeehAccount,
-    ] = manager.create(Account, [
+    const [huguetteAccount, hectorAccount, henryAccount, kevinAccount, jeanEudesAccount, gneeeeehAccount] = manager.create(Account, [
         {
             title: "Compte courant",
             description: "Compte créer par défaut",
@@ -654,14 +626,7 @@ export async function seeder() {
         },
     ]);
 
-    await manager.save([
-        huguetteAccount,
-        hectorAccount,
-        henryAccount,
-        kevinAccount,
-        jeanEudesAccount,
-        gneeeeehAccount,
-    ]);
+    await manager.save([huguetteAccount, hectorAccount, henryAccount, kevinAccount, jeanEudesAccount, gneeeeehAccount]);
 
     huguette.accounts = [huguetteAccount];
     hector.accounts = [hectorAccount];
@@ -864,16 +829,14 @@ export async function seeder() {
             lastName: "Amissi",
             firstName: "Steve",
             email: "steva@test.com",
-            password:
-                "$2a$10$aS/IMuW.xTi3.Zg0YW85N.kt5bQmF4eeGDgoFVPmdr3dvh8hOs9eu",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
         {
             lastName: "Aminnon",
             firstName: "Corine",
             email: "coco42@hotmail.com",
-            password:
-                "$2a$10$mhljXdRwwESQzAPT1vPCjOV6psjbJiUjTCL4tNiQNAIFAFQMmqwHK",
+            password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
             group: null,
         },
     ]);
@@ -1050,8 +1013,7 @@ export async function seeder() {
         lastName: "Prince",
         firstName: "Diana",
         email: "dp@test.com",
-        password:
-            "$2a$10$HDPyA/wRMdQVkm34LYtKQ.LJQQMrzhteysAosTSja8OeDZp73RWpO",
+        password: "$2a$10$QkHItHEUqRfR/ru3uxWzp.kua.XYlK7AWN8/9LWjB6EHFaVut0Rma",
         group: null,
     });
 
