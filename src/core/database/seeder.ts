@@ -28,7 +28,7 @@ export async function seeder() {
         {
             lastName: "Leblond",
             firstName: "François",
-            email: "françois.leblond@gmail.com",
+            email: "francois.leblond@gmail.com",
             password: "$2a$10$p6Cn4orPK.HV4k6FXRNKG.pIMZknFPRE7sJzfwZral1HmqnoZyUbC",
             group: null,
         },
