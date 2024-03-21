@@ -56,6 +56,11 @@ export async function getUserAccounts(id: string) {
             id,
         },
         relations: ["accounts"],
+        order: {
+            accounts: {
+                createdAt: "ASC",
+            },
+        },
     });
 
     if (!foundEntity) {
