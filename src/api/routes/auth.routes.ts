@@ -48,12 +48,11 @@ authRouter.post("/login", async (request, response, next) => {
 authRouter.post("/register", async (request, response, next) => {
     const body = request.body;
 
-    try {
-        await getUserByEmail(body.email);
-        response.status(409).json({
+    if ((await getUserByEmail(body.email)) !== null) {
+        response.status(409).send({
             message: "Mail exists",
         });
-    } catch (error) {
+    } else {
         bcrypt.hash(body.password, 10, (err, hash) => {
             if (err) {
                 return response.status(500);
