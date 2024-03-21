@@ -18,6 +18,12 @@ export class Budget {
     })
     public declare description: string;
 
+    @Column({
+        type: "boolean",
+        default: true,
+    })
+    public declare isActive: boolean;
+
     @OneToOne(() => Transaction, (transaction) => transaction.budget, { nullable: true })
     public declare transactions: Transaction[] | null;
 
