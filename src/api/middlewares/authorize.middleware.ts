@@ -15,9 +15,13 @@ export function authorizeMiddleWare(roles: string[]): RequestHandler {
                 complete: true,
             });
 
-            const user = await getUserById(
-                accessTokenDecoded.payload.sub as string
-            );
+            const payload = accessTokenDecoded.payload as unknown as {
+                id: string;
+                iat: Date;
+                exp: Date;
+            };
+            const userId = payload.id;
+            const user = await getUserById(userId);
 
             if (!user) {
                 return response.status(403).send("Forbidden");
