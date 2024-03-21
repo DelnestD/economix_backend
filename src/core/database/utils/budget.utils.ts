@@ -34,3 +34,10 @@ export async function deleteBudget(id: string) {
     await DatabaseConnection.manager.delete(Budget, budget);
     return budget;
 }
+
+export async function softDeleteBudget(id: string) {
+    const budget = await getBudgetById(id);
+    budget.isActive = false;
+    await DatabaseConnection.manager.save(budget);
+    return budget;
+}

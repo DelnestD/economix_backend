@@ -2,10 +2,7 @@ import bcrypt from "bcrypt";
 import { Router } from "express";
 import { sign } from "jsonwebtoken";
 import { LoginFailedError } from "../error/types.error";
-import {
-    getUserByEmail,
-    insertUser,
-} from "../../core/database/utils/user.utils";
+import { getUserByEmail, insertUser } from "../../core/database/utils/user.utils";
 import { insertAccount } from "../../core/database/utils/account.utils";
 
 export const authRouter = Router();
